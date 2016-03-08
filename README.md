@@ -1,7 +1,8 @@
 # react-test-tree [![Build Status](https://travis-ci.org/QubitProducts/react-test-tree.svg)](https://travis-ci.org/QubitProducts/react-test-tree) [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](http://standardjs.com/)
 
-
 [![Sauce Test Status](https://saucelabs.com/browser-matrix/oliverwoodings.svg)](https://saucelabs.com/u/oliverwoodings)
+
+### react-test-tree is no longer actively maintained. Please use [enzyme](https://github.com/airbnb/enzyme) or [teaspoon](https://github.com/jquense/teaspoon) instead. See [here](https://github.com/QubitProducts/react-test-tree/issues/58) more info.
 
 ## Install
 
