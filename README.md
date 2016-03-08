@@ -237,7 +237,7 @@ Returns the `innerText` of the element (or `textContent` if `innerText` not pres
 
 
 ## Updating to v1.0.0
-React 0.14 introduced stateless function components. This new type of component cannot contain refs and also cannot have refs applied to them. The React team is trying to encourage refs to only be used for very specific purposes, which doesn't primarily include testing. We have taken the decision with `react-test-tree` to support the React team in their decision to separate the usage of refs from testing by switching to using the `testRef` and `testRefCollection` props instead of `ref` and `testRef`. Here is an example of a component pre-v1.0.0 and after:
+React 0.14 introduced stateless function components. This new type of component cannot contain refs and also cannot have refs applied to them. The React team is trying to encourage refs to only be used for very specific purposes, which doesn't primarily include testing. We have taken the decision with `react-test-tree` to support the React team in their decision to separate the usage of refs from testing by switching to using the `testRef` and `testRefCollection` props instead of `ref` and `refCollection`. Here is an example of a component pre-v1.0.0 and after:
 
 ```jsx
 // Pre-v1.0.0
