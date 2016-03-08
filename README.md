@@ -235,6 +235,39 @@ Reference to the original React element for the node.
 ### `node.innerText`
 Returns the `innerText` of the element (or `textContent` if `innerText` not present).
 
+## Higher Order Components
+The HOC pattern is rapidly becoming the most popular successor to mixins (and the [problems associated with them](https://medium.com/@dan_abramov/mixins-are-dead-long-live-higher-order-components-94a0d2f9e750)). Unfortunately every HOC adds another layer into the component tree, making your testing ref chains longer and less explicit. `react-test-tree` can help alleviate this pain by skipping any component that has the `innerTestRef` property available on its constructor. Here is an example:
+
+```jsx
+var InnerComponent = React.createClass({
+  render: function () {
+    return (
+      <div>
+        <button ref="button" />
+      </div>
+    )
+  }
+});
+
+function withHOC(Component) {
+  return React.createClass({
+    render: function () {
+      return <Component ref="innerComponent" />;
+    }
+  });
+}
+
+var MyComponent = withHOC(InnerComponent);
+
+// Without specifying `innerTestRef` we have to deal with the HOC in the ref tree
+var annoyingTree = testTree(<MyComponent />);
+annoyingTree.innerComponent.button.click();
+
+// Adding `innerTestRef` causes react-test-tree to ignore the HOC, keeping the API nice and clean
+MyComponent.innerTestRef = "innerComponent";
+var niceTree = testTree(<MyComponent />);
+niceTree.button.click();
+```
 
 ## Updating to v1.0.0
 React 0.14 introduced stateless function components. This new type of component cannot contain refs and also cannot have refs applied to them. The React team is trying to encourage refs to only be used for very specific purposes, which doesn't primarily include testing. We have taken the decision with `react-test-tree` to support the React team in their decision to separate the usage of refs from testing by switching to using the `testRef` and `testRefCollection` props instead of `ref` and `refCollection`. Here is an example of a component pre-v1.0.0 and after:
@@ -296,7 +329,7 @@ tree.foo; // exists
 
 
 ## React versions
-The master branch currently supports React 0.14 and is not backwards compatible. 
+The master branch currently supports React 0.14 and is not backwards compatible.
 
 * __React 0.14:__ `react-test-tree@latest`
 * __React 0.13/0.12:__ `react-test-tree@^0.3.1`
